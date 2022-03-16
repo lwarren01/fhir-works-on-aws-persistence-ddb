@@ -14,6 +14,7 @@ import getComponentLogger from '../loggerBuilder';
 const logger = getComponentLogger();
 
 const BINARY_RESOURCE = 'binary';
+const TTL_FIELD_NAME = '_ttlInSeconds';
 
 function isBinaryResource(image: any): boolean {
     const resourceType = image.resourceType.toLowerCase();
@@ -77,7 +78,7 @@ export class DdbToEsSync {
 
                 const removeResource = this.ddbToEsHelper.isRemoveResource(record);
                 const ddbJsonImage = removeResource ? record.dynamodb.OldImage : record.dynamodb.NewImage;
-                const image = omit(AWS.DynamoDB.Converter.unmarshall(ddbJsonImage), ['_ttlInSeconds']);
+                const image = omit(AWS.DynamoDB.Converter.unmarshall(ddbJsonImage), [TTL_FIELD_NAME]);
 
                 logger.debug(image);
                 // Don't index binary files
