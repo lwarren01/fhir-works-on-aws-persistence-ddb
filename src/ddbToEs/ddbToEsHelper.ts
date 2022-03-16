@@ -23,6 +23,9 @@ const logger = getComponentLogger();
 const { IS_OFFLINE, ELASTICSEARCH_DOMAIN_ENDPOINT } = process.env;
 
 const formatDocument = (ddbImage: any): any => {
+    // eslint-disable-next-line no-param-reassign
+    delete ddbImage._ttlInSeconds;
+
     // eslint-disable-next-line no-underscore-dangle
     if (ddbImage._tenantId) {
         return {
