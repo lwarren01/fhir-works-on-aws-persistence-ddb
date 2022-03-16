@@ -8,6 +8,7 @@ export * from './dataServices/dynamoDbUtil';
 export { DynamoDb } from './dataServices/dynamoDb';
 export * from './objectStorageService/s3DataService';
 export { handleDdbToEsEvent } from './ddbToEs/index';
+export { handleDdbToS3Event } from './ddbToS3/index';
 export { DdbToEsSync } from './ddbToEs/ddbToEsSync';
 export { startExportJobHandler } from './bulkExport/startExportJob';
 export { stopExportJobHandler } from './bulkExport/stopExportJob';
