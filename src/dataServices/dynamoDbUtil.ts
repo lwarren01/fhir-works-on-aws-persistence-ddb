@@ -14,6 +14,7 @@ export const VID_FIELD = 'vid';
 export const REFERENCES_FIELD = '_references';
 export const TENANT_ID_FIELD = '_tenantId';
 export const INTERNAL_ID_FIELD = '_id';
+export const TTL_FIELD_NAME = '_ttlInSeconds';
 
 export const buildHashKey = (id: string, tenantId?: string): string => {
     if (tenantId) {
@@ -30,6 +31,7 @@ export class DynamoDbUtil {
         delete cleanedItem[LOCK_END_TS_FIELD];
         delete cleanedItem[VID_FIELD];
         delete cleanedItem[REFERENCES_FIELD];
+        delete cleanedItem[TTL_FIELD_NAME];
 
         // Return id instead of full id (this is only a concern in results from ES)
         const id = item.id.split(SEPARATOR)[0];
