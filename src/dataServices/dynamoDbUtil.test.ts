@@ -68,6 +68,28 @@ describe('cleanItem', () => {
             id,
         });
     });
+
+    test('Remove TTL field correctly', () => {
+        const item: any = {
+            resourceType: 'Patient',
+            id: 'tenant1|some-id',
+
+            _ttlInSeconds: 123456,
+            _id: 'some-id',
+
+            lockEndTs: 1624339984746,
+            documentStatus: 'AVAILABLE',
+            vid,
+            _references: ['Organization/1', 'Patient/pat2'],
+        };
+
+        const actualItem = DynamoDbUtil.cleanItem(item);
+
+        expect(actualItem).toEqual({
+            resourceType: 'Patient',
+            id: 'some-id',
+        });
+    });
 });
 
 describe('prepItemForDdbInsert', () => {
